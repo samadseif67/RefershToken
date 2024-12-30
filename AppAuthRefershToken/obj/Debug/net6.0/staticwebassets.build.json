@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "KIXf7d90POjz8HMoQDyag4LeOfOLj9vs24X3huM4+iM=",
+  "Source": "AppAuthRefershToken",
+  "BasePath": "_content/AppAuthRefershToken",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
