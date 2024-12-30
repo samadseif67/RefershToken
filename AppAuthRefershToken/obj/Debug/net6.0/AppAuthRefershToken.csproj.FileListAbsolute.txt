@@ -68,3 +68,4 @@ E:\project\AppAuthorization\AppAuthRefershToken\AppAuthRefershToken\bin\Debug\ne
 E:\project\AppAuthorization\AppAuthRefershToken\AppAuthRefershToken\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 E:\project\AppAuthorization\AppAuthRefershToken\AppAuthRefershToken\bin\Debug\net6.0\Microsoft.Bcl.TimeProvider.dll
 E:\project\AppAuthorization\AppAuthRefershToken\AppAuthRefershToken\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+E:\project\AppAuthorization\AppAuthRefershToken\AppAuthRefershToken\obj\Debug\net6.0\AppAuthRefershToken.sourcelink.json

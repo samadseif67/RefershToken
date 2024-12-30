@@ -12,7 +12,7 @@ using System.Text;
 
 namespace AppAuthRefershToken.Controllers
 {
-     
+    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -28,13 +28,13 @@ namespace AppAuthRefershToken.Controllers
 
 
 
-        [HttpPost,Authorize]
+        [HttpPost]
         public ActionResult GetMyName()
         {
             return Ok(_UserService.GetName());
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Register(UserDto userDto)
         {
@@ -49,6 +49,7 @@ namespace AppAuthRefershToken.Controllers
         }
 
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(UserDto userDto)
         {
@@ -72,6 +73,7 @@ namespace AppAuthRefershToken.Controllers
         }
 
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> GetRefershToken()
         {
@@ -94,24 +96,33 @@ namespace AppAuthRefershToken.Controllers
 
         }
 
-         
+
+
         [NonAction]
         private string CreateToken(User user)
         {
-            List<Claim> claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, user.Username));
-            claims.Add(new Claim(ClaimTypes.Role, "Admin"));
-            claims.Add(new Claim(ClaimTypes.Role, "User"));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var keyToken = _configuration.GetSection("Jwt:Key").Value;
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyToken));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(claims: claims, expires: DateTime.Now.AddMinutes(1), signingCredentials: creds);
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            var claims = new[]
+            {
+            new Claim(ClaimTypes.Name, user.Username),           
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(JwtRegisteredClaimNames.Aud, _configuration["Jwt:Audience"]),
+            new Claim(JwtRegisteredClaimNames.Iss, _configuration["Jwt:Issuer"])
+        };
 
-            return jwt;
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Issuer"],
+                audience: _configuration["Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddMonths(2),
+                signingCredentials: credentials
+                );
 
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
+         
 
         [NonAction]
         private RefershToken GenerateRefershToken()

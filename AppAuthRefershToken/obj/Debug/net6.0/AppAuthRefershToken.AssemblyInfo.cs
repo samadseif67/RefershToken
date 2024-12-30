@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AppAuthRefershToken")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ed48b7bbc2a841135a9b1dc9a8edde65f4614ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("AppAuthRefershToken")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AppAuthRefershToken")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
